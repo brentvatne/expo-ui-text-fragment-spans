@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Host, Image, Text, VStack } from '@expo/ui/swift-ui';
+import { padding } from '@expo/ui/swift-ui/modifiers';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Host style={{ flex: 1 }}>
+      <VStack alignment="leading" spacing={12} modifiers={[padding({ all: 16 })]}>
+        <Text>Each line below should read the same as its label. The fragment and the Image are dropped.</Text>
+        <Text>Expected "A-B-C":</Text>
+        <Text>
+          {'A'}
+          <>
+            <Text>{'-B'}</Text>
+          </>
+          <Text>{'-C'}</Text>
+        </Text>
+        <Text>Expected "A-★-C":</Text>
+        <Text>
+          {'A-'}
+          <Image systemName="star.fill" />
+          <Text>{'-C'}</Text>
+        </Text>
+      </VStack>
+    </Host>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
